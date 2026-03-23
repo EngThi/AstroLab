@@ -1,5 +1,6 @@
 from src.nasa_client import nasa_client
 from src.gemini_client import gemini_client
+from src.session import session_manager
 from rich.console import Console
 from rich.panel import Panel
 from rich.prompt import Prompt
@@ -30,9 +31,9 @@ class QuizGenerator:
             console.print("[bold red]Falha ao gerar o quiz.[/bold red]")
             return
             
-        self._execute_quiz(questions)
+        self._execute_quiz(questions, title)
 
-    def _execute_quiz(self, questions: list):
+    def _execute_quiz(self, questions: list, topic_title: str):
         score = 0
         console.print("\n[bold green]--- 🚀 INICIANDO SPACE QUIZ ---[/bold green]\n")
         
@@ -56,3 +57,7 @@ class QuizGenerator:
             console.print(f"[italic]Explicação: {q.get('explanation')}[/italic]\n")
             
         console.print(f"[bold yellow]--- Fim do Quiz! Sua pontuação: {score}/{len(questions)} ---[/bold yellow]\n")
+        
+        # Salva o resultado no histórico de sessões
+        session_manager.save_session(topic_title, score, len(questions))
+        console.print(f"[dim]Sessão salva no histórico. Use 'main.py stats' para ver seu progresso.[/dim]")

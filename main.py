@@ -4,6 +4,7 @@ from rich.panel import Panel
 from src.nasa_client import nasa_client
 from src.flashcard import FlashcardGenerator
 from src.quiz import QuizGenerator
+from src.session import session_manager
 
 console = Console()
 
@@ -39,6 +40,9 @@ def main():
     # Comando 'flashcard'
     flashcard_parser = subparsers.add_parser("flashcard", help="Cria um flashcard sobre um tema espacial")
     flashcard_parser.add_argument("tema", type=str, help="Tema para buscar na NASA (ex: 'gravidade', 'black hole')")
+
+    # Comando 'stats'
+    subparsers.add_parser("stats", help="Mostra o histórico de progresso das suas sessões de estudo")
     
     args = parser.parse_args()
     
@@ -50,6 +54,8 @@ def main():
     elif args.command == "flashcard":
         generator = FlashcardGenerator()
         generator.create_flashcard(args.tema)
+    elif args.command == "stats":
+        session_manager.show_stats()
     else:
         parser.print_help()
 

@@ -1,13 +1,14 @@
-# Study-Lab-Core: Space Pivot 🚀
+# AstroLab (ex-Study-Lab-Core) 🚀
 [![NASA API Powered](https://img.shields.io/badge/NASA-API_Powered-blue)](https://api.nasa.gov/)
 
-Pivot para o desafio Sidequest Challenger. Ferramenta de estudo de astronomia/física que utiliza dados reais da NASA (APOD) e gera perguntas (Flashcards e Quizzes) interativas usando o Google Gemini.
+Pivot para o desafio Sidequest Challenger. Ferramenta de estudo de astronomia/física que utiliza dados reais da NASA (APOD) e gera perguntas (Flashcards e Quizzes) interativas usando o Google Gemini. O estudo perfeito "entre as aulas"!
 
 ## Funcionalidades
 
 - `python main.py apod`: Mostra a "Astronomy Picture of the Day" com explicação.
 - `python main.py quiz`: Gera um quiz interativo de 5 perguntas sobre o APOD do dia usando IA.
 - `python main.py flashcard "<tema>"`: Cria um flashcard temático baseado nos dados do espaço.
+- `python main.py stats`: **[NOVO]** Exibe o seu histórico de progresso de estudo com gráficos de barras estilizados no terminal! Acompanhe sua evolução e acertos em cada sessão.
 
 ## Quick Start
 
@@ -32,3 +33,4 @@ python main.py apod
 - **NASA APOD API:** Fornece os dados base do dia.
 - **Google Gemini API:** Gera e avalia perguntas com base no contexto espacial.
 - **Python / Rich:** Interface CLI rica em recursos visuais.
+- **Armazenamento de Sessão:** Histórico persistido localmente via JSON em `data/sessions/`.

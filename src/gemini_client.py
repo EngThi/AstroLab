@@ -107,6 +107,44 @@ class GeminiClient:
         except Exception:
             return self._fallback_flashcard(topic)
 
+    def generate_deep_dive(self, wrong_answers: list) -> str:
+        """
+        Gera uma explicação aprofundada baseada nos erros do usuário no quiz.
+        
+        Args:
+            wrong_answers: Lista de dicionários representando as perguntas erradas.
+            
+        Returns:
+            str: Texto formatado (pode conter markdown) com as explicações didáticas.
+        """
+        if not self.model:
+            return "Desculpe, o Deep Dive requer uma chave GEMINI_API_KEY válida para gerar conteúdo dinâmico."
+            
+        erros_formatados = ""
+        for i, q in enumerate(wrong_answers, 1):
+            erros_formatados += f"Erro {i}:\n"
+            erros_formatados += f"Pergunta: {q.get('question')}\n"
+            erros_formatados += f"Resposta Correta: {q.get('answer')}\n\n"
+
+        prompt = f"""
+        Você é um professor universitário de astrofísica apaixonado por ensinar. 
+        Um aluno acabou de fazer um quiz sobre astronomia e errou as seguintes questões:
+
+        {erros_formatados}
+
+        Por favor, crie um guia de estudo curto e aprofundado (Deep Dive) focado APENAS nestes conceitos.
+        Sua resposta não precisa ser um JSON. Pode usar Markdown livremente.
+        - Explique a intuição física por trás de cada erro.
+        - Use analogias do dia a dia para ajudar na memorização.
+        - Seja encorajador.
+        """
+        
+        try:
+            response = self.model.generate_content(prompt)
+            return response.text.strip()
+        except Exception as e:
+            return f"Ocorreu um erro ao gerar o Deep Dive: {e}"
+
     def _fallback_quiz(self) -> list:
         """Retorna um quiz fixo caso a API falhe (ex: sem internet ou sem chave)."""
         return [

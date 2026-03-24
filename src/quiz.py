@@ -3,7 +3,7 @@ from src.gemini_client import gemini_client
 from src.session import session_manager
 from rich.console import Console
 from rich.panel import Panel
-from rich.prompt import Prompt
+from rich.prompt import Prompt, Confirm
 
 console = Console()
 
@@ -35,6 +35,7 @@ class QuizGenerator:
 
     def _execute_quiz(self, questions: list, topic_title: str):
         score = 0
+        wrong_answers = []
         console.print("\n[bold green]--- 🚀 INICIANDO SPACE QUIZ ---[/bold green]\n")
         
         for i, q in enumerate(questions, 1):
@@ -53,6 +54,7 @@ class QuizGenerator:
                 score += 1
             else:
                 console.print(f"[bold red]❌ Incorreto.[/bold red] A resposta certa era: {resposta_correta}")
+                wrong_answers.append(q)
                 
             console.print(f"[italic]Explicação: {q.get('explanation')}[/italic]\n")
             
@@ -61,3 +63,9 @@ class QuizGenerator:
         # Salva o resultado no histórico de sessões
         session_manager.save_session(topic_title, score, len(questions))
         console.print(f"[dim]Sessão salva no histórico. Use 'main.py stats' para ver seu progresso.[/dim]")
+        
+        if wrong_answers and Confirm.ask("\n[bold cyan]Você errou algumas perguntas. Deseja uma explicação aprofundada (Deep Dive) da IA sobre os seus erros?[/bold cyan]"):
+            with console.status("[bold magenta]Analisando seus erros e gerando Deep Dive educacional..."):
+                deep_dive_text = gemini_client.generate_deep_dive(wrong_answers)
+            console.print(Panel(deep_dive_text, title="[bold blue]🧠 Deep Dive: Revisão Focada[/bold blue]", border_style="blue"))
+

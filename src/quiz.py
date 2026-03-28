@@ -8,27 +8,27 @@ from rich.prompt import Prompt, Confirm
 console = Console()
 
 class QuizGenerator:
-    """Gerador e executor de quizzes baseados em dados da NASA."""
+    """Generator and executor of NASA data-based quizzes."""
     
     def run_daily_quiz(self):
-        """Busca o APOD do dia e gera um quiz interativo de 5 perguntas."""
-        with console.status("[bold cyan]Buscando Foto Astronômica do Dia (APOD)..."):
+        """Fetches the APOD and generates an interactive 5-question quiz."""
+        with console.status("[bold cyan]Fetching Astronomy Picture of the Day (APOD)..."):
             try:
                 apod_data = nasa_client.get_apod()
             except Exception as e:
-                console.print(f"[bold red]Erro ao buscar dados da NASA: {e}[/bold red]")
+                console.print(f"[bold red]Error fetching NASA data: {e}[/bold red]")
                 return
                 
-        title = apod_data.get("title", "Desconhecido")
+        title = apod_data.get("title", "Unknown")
         explanation = apod_data.get("explanation", "")
         
         console.print(Panel(f"[italic]{explanation}[/italic]", title=f"🔭 {title}"))
         
-        with console.status("[bold magenta]IA gerando 5 perguntas baseadas no texto acima..."):
+        with console.status("[bold magenta]AI generating 5 questions based on the text above..."):
             questions = gemini_client.generate_quiz(explanation, num_questions=5)
             
         if not questions:
-            console.print("[bold red]Falha ao gerar o quiz.[/bold red]")
+            console.print("[bold red]Failed to generate the quiz.[/bold red]")
             return
             
         self._execute_quiz(questions, title)
@@ -36,36 +36,37 @@ class QuizGenerator:
     def _execute_quiz(self, questions: list, topic_title: str):
         score = 0
         wrong_answers = []
-        console.print("\n[bold green]--- 🚀 INICIANDO SPACE QUIZ ---[/bold green]\n")
+        console.print("\n[bold green]--- 🚀 STARTING SPACE QUIZ ---[/bold green]\n")
         
         for i, q in enumerate(questions, 1):
-            console.print(f"[bold cyan]Pergunta {i}:[/bold cyan] {q.get('question')}")
+            console.print(f"[bold cyan]Question {i}:[/bold cyan] {q.get('question')}")
             for opt in q.get('options', []):
                 console.print(f"  {opt}")
                 
-            resposta_usuario = Prompt.ask("\nSua resposta (ex: A, B, C, D)").strip().upper()
+            user_answer = Prompt.ask("\nYour answer (e.g., A, B, C, D)").strip().upper()
             
-            # Pega apenas a letra da resposta correta (ex: "A) texto" -> "A")
-            resposta_correta = q.get('answer', '')
-            letra_correta = resposta_correta[0].upper() if resposta_correta else ''
+            # Extract just the letter of the correct answer (e.g., "A) text" -> "A")
+            correct_answer = q.get('answer', '')
+            correct_letter = correct_answer[0].upper() if correct_answer else ''
             
-            if resposta_usuario == letra_correta:
-                console.print("[bold green]✅ Correto![/bold green]")
+            if user_answer == correct_letter:
+                console.print("[bold green]✅ Correct![/bold green]")
                 score += 1
             else:
-                console.print(f"[bold red]❌ Incorreto.[/bold red] A resposta certa era: {resposta_correta}")
+                console.print(f"[bold red]❌ Incorrect.[/bold red] The correct answer was: {correct_answer}")
                 wrong_answers.append(q)
                 
-            console.print(f"[italic]Explicação: {q.get('explanation')}[/italic]\n")
+            console.print(f"[italic]Explanation: {q.get('explanation')}[/italic]\n")
             
-        console.print(f"[bold yellow]--- Fim do Quiz! Sua pontuação: {score}/{len(questions)} ---[/bold yellow]\n")
+        console.print(f"[bold yellow]--- End of Quiz! Your score: {score}/{len(questions)} ---[/bold yellow]\n")
         
-        # Salva o resultado no histórico de sessões
+        # Save result to session history
         session_manager.save_session(topic_title, score, len(questions))
-        console.print(f"[dim]Sessão salva no histórico. Use 'main.py stats' para ver seu progresso.[/dim]")
+        console.print(f"[dim]Session saved to history. Use 'astrolab stats' to view your progress.[/dim]")
         
-        if wrong_answers and Confirm.ask("\n[bold cyan]Você errou algumas perguntas. Deseja uma explicação aprofundada (Deep Dive) da IA sobre os seus erros?[/bold cyan]"):
-            with console.status("[bold magenta]Analisando seus erros e gerando Deep Dive educacional..."):
+        if wrong_answers and Confirm.ask("\n[bold cyan]You missed some questions. Do you want an AI-powered Deep Dive explanation for your mistakes?[/bold cyan]"):
+            with console.status("[bold magenta]Analyzing your mistakes and generating an educational Deep Dive..."):
                 deep_dive_text = gemini_client.generate_deep_dive(wrong_answers)
-            console.print(Panel(deep_dive_text, title="[bold blue]🧠 Deep Dive: Revisão Focada[/bold blue]", border_style="blue"))
+            console.print(Panel(deep_dive_text, title="[bold blue]🧠 Deep Dive: Focused Review[/bold blue]", border_style="blue"))
+
 

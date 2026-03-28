@@ -12,10 +12,10 @@ if GEMINI_API_KEY:
     genai.configure(api_key=GEMINI_API_KEY)
 
 class GeminiClient:
-    """Cliente para a API do Google Gemini com fallback inteligente para Demonstração."""
+    """Client for Google Gemini API with smart fallback for demonstrations."""
     
     def __init__(self):
-        # Utiliza o modelo gemini-1.5-flash para tarefas rápidas de texto
+        # Uses gemini-1.5-flash for quick text tasks
         if GEMINI_API_KEY:
             self.model = genai.GenerativeModel('gemini-1.5-flash')
         else:
@@ -24,7 +24,7 @@ class GeminiClient:
         self._load_demo_cache()
 
     def _load_demo_cache(self):
-        """Carrega dados em cache para demonstração offline."""
+        """Loads cached data for offline demonstration."""
         try:
             with open("data/demo_cache.json", "r", encoding="utf-8") as f:
                 self.demo_data = json.load(f)
@@ -32,16 +32,16 @@ class GeminiClient:
             self.demo_data = {"quizzes": [], "deep_dives": [], "flashcards": {}}
 
     def _generate_json(self, prompt: str) -> dict:
-        """Helper para garantir que a resposta seja um JSON válido."""
+        """Helper to ensure the response is valid JSON."""
         if not self.model:
-            raise ValueError("GEMINI_API_KEY não configurada.")
+            raise ValueError("GEMINI_API_KEY not configured.")
             
-        full_prompt = f"{prompt}\n\nResponda APENAS com um objeto JSON válido, sem formatação markdown ou texto extra."
+        full_prompt = f"{prompt}\n\nRespond ONLY with a valid JSON object, without markdown formatting or extra text."
         
         response = self.model.generate_content(full_prompt)
         text = response.text.strip()
         
-        # Remove possíveis blocos de código markdown que o modelo pode retornar
+        # Removes possible markdown code blocks returned by the model
         if text.startswith("```json"):
             text = text[7:]
         if text.startswith("```"):
@@ -52,28 +52,28 @@ class GeminiClient:
         try:
             return json.loads(text.strip())
         except json.JSONDecodeError:
-            # Fallback em caso de erro na geração
-            return {"error": "Falha ao decodificar JSON do Gemini", "raw_text": text}
+            # Fallback in case of generation error
+            return {"error": "Failed to decode JSON from Gemini", "raw_text": text}
 
     def generate_quiz(self, context_text: str, num_questions: int = 5) -> list:
-        """Gera um quiz com base no texto fornecido."""
+        """Generates a quiz based on the provided text."""
         if not self.model:
             return self._fallback_quiz()
 
         prompt = f"""
-        Baseado no texto a seguir sobre astronomia, crie um quiz com {num_questions} perguntas de múltipla escolha.
-        O nível deve ser para estudantes universitários (desafiador mas focado nos conceitos do texto).
+        Based on the following astronomy text, create a quiz with {num_questions} multiple-choice questions.
+        The level should be for university students (challenging but focused on the text's concepts).
         
-        TEXTO:
+        TEXT:
         {context_text}
         
-        O JSON de saída deve ser estritamente uma lista de objetos com este formato:
+        The output JSON must strictly be a list of objects with this format:
         [
             {{
-                "question": "texto da pergunta",
+                "question": "question text",
                 "options": ["A) op1", "B) op2", "C) op3", "D) op4"],
-                "answer": "A) op1",  // DEVE ser exatamente igual a uma das strings na lista de opções
-                "explanation": "Por que esta é a resposta correta baseado no texto"
+                "answer": "A) op1",  // MUST match exactly one of the strings in the options list
+                "explanation": "Why this is the correct answer based on the text"
             }}
         ]
         """
@@ -81,28 +81,28 @@ class GeminiClient:
             result = self._generate_json(prompt)
             if isinstance(result, list):
                 return result
-            elif isinstance(result, dict) and "quiz" in result: # Lida com pequenas variações estruturais
+            elif isinstance(result, dict) and "quiz" in result: # Handles slight structural variations
                 return result["quiz"]
             return self._fallback_quiz()
         except Exception as e:
-            print(f"Erro ao gerar quiz: {e}")
+            print(f"Error generating quiz: {e}")
             return self._fallback_quiz()
 
     def generate_flashcard(self, topic: str, context_text: str) -> dict:
-        """Gera o conteúdo de um flashcard."""
+        """Generates flashcard content."""
         if not self.model:
             return self._fallback_flashcard(topic)
 
         prompt = f"""
-        Baseado no texto da NASA sobre o tema '{topic}', crie o conteúdo para um flashcard de estudo.
+        Based on the NASA text about '{topic}', create the content for a study flashcard.
         
-        TEXTO:
+        TEXT:
         {context_text}
         
-        O JSON de saída deve ser um objeto com este formato:
+        The output JSON must be an object with this format:
         {{
-            "front": "Uma pergunta direta ou conceito chave sobre {topic}",
-            "back": "A resposta detalhada, direta e fácil de memorizar"
+            "front": "A direct question or key concept about {topic}",
+            "back": "The detailed, direct, and easy-to-memorize answer"
         }}
         """
         try:
@@ -114,49 +114,49 @@ class GeminiClient:
             return self._fallback_flashcard(topic)
 
     def generate_deep_dive(self, wrong_answers: list) -> str:
-        """Gera uma explicação aprofundada baseada nos erros."""
+        """Generates an in-depth explanation based on errors."""
         if not self.model:
-            return self.demo_data.get("deep_dives", ["Desculpe, modo offline. Verifique a documentação para habilitar a IA."])[0]
+            return self.demo_data.get("deep_dives", ["Sorry, offline mode. Check the documentation to enable AI."])[0]
             
-        erros_formatados = ""
+        formatted_errors = ""
         for i, q in enumerate(wrong_answers, 1):
-            erros_formatados += f"Erro {i}:\n"
-            erros_formatados += f"Pergunta: {q.get('question')}\n"
-            erros_formatados += f"Resposta Correta: {q.get('answer')}\n\n"
+            formatted_errors += f"Error {i}:\n"
+            formatted_errors += f"Question: {q.get('question')}\n"
+            formatted_errors += f"Correct Answer: {q.get('answer')}\n\n"
 
         prompt = f"""
-        Você é um professor universitário de astrofísica apaixonado por ensinar. 
-        Um aluno acabou de fazer um quiz sobre astronomia e errou as seguintes questões:
+        You are a university astrophysics professor passionate about teaching. 
+        A student just took an astronomy quiz and missed the following questions:
 
-        {erros_formatados}
+        {formatted_errors}
 
-        Por favor, crie um guia de estudo curto e aprofundado (Deep Dive) focado APENAS nestes conceitos.
-        Sua resposta não precisa ser um JSON. Pode usar Markdown livremente.
-        - Explique a intuição física por trás de cada erro.
-        - Use analogias do dia a dia para ajudar na memorização.
-        - Seja encorajador.
+        Please create a short, in-depth study guide (Deep Dive) focused ONLY on these concepts.
+        Your response does not need to be JSON. Use Markdown freely.
+        - Explain the physical intuition behind each error.
+        - Use everyday analogies to aid memorization.
+        - Be encouraging.
         """
         
         try:
             response = self.model.generate_content(prompt)
             return response.text.strip()
         except Exception as e:
-            return f"Ocorreu um erro ao gerar o Deep Dive: {e}"
+            return f"An error occurred generating the Deep Dive: {e}"
 
     def _fallback_quiz(self) -> list:
-        """Retorna um quiz fixo rico do cache caso a API falhe."""
+        """Returns a rich fixed quiz from cache if the API fails."""
         quizzes = self.demo_data.get("quizzes", [])
         if quizzes:
             return random.choice(quizzes)
         return []
         
     def _fallback_flashcard(self, topic: str) -> dict:
-        """Retorna um flashcard do cache de demonstração."""
+        """Returns a flashcard from the demo cache."""
         cards = self.demo_data.get("flashcards", {})
-        # Tenta achar um card que bata com o tema, senão pega o default
+        # Tries to find a card matching the topic, otherwise gets default
         topic_lower = topic.lower()
         if topic_lower in cards:
             return cards[topic_lower]
-        return cards.get("default", {"front": "Modo Offline", "back": "Adicione GEMINI_API_KEY no .env"})
+        return cards.get("default", {"front": "Offline Mode", "back": "Add GEMINI_API_KEY to .env"})
 
 gemini_client = GeminiClient()

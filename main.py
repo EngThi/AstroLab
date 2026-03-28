@@ -14,46 +14,52 @@ from dotenv import load_dotenv
 console = Console()
 
 def check_env():
-    """Verifica se o arquivo .env foi configurado."""
+    """Checks if the .env file is configured."""
     load_dotenv()
     if not os.getenv("NASA_API_KEY"):
-        console.print("[bold red]⚠️ Atenção: NASA_API_KEY não encontrada.[/bold red]")
-        console.print("Por favor, crie um arquivo [bold white].env[/bold white] (use o .env.example como base).")
-        console.print("O projeto usará a chave DEMO_KEY, que tem limite baixo de requisições.\n")
+        console.print("[bold red]⚠️ Warning: NASA_API_KEY not found.[/bold red]")
+        console.print("Please create a [bold white].env[/bold white] file (use .env.example as a template).")
+        console.print("The project will use the DEMO_KEY, which has a very low rate limit.\n")
 
 def show_apod():
-    """Mostra a Astronomy Picture of the Day e uma curiosidade se possível."""
-    with console.status("[bold cyan]Buscando APOD na NASA..."):
+    """Displays the Astronomy Picture of the Day."""
+    with console.status("[bold cyan]Fetching APOD from NASA..."):
         try:
             data = nasa_client.get_apod()
         except Exception as e:
-            console.print(f"[bold red]Erro ao acessar a API da NASA: {e}[/bold red]")
+            console.print(f"[bold red]Error accessing NASA API: {e}[/bold red]")
             return
             
-    title = data.get("title", "Sem título")
-    explanation = data.get("explanation", "Sem descrição")
+    title = data.get("title", "Untitled")
+    explanation = data.get("explanation", "No description available.")
     date = data.get("date", "")
     url = data.get("url", "")
     
     console.print(f"\n[bold blue]🚀 APOD - Astronomy Picture of the Day ({date})[/bold blue]")
-    console.print(f"[bold white]Título:[/bold white] {title}")
-    console.print(f"[bold white]Link/Imagem:[/bold white] [link={url}]{url}[/link]\n")
-    console.print(Panel(explanation, title="Explicação", expand=False))
+    console.print(f"[bold white]Title:[/bold white] {title}")
+    console.print(f"[bold white]Link/Image:[/bold white] [link={url}]{url}[/link]\n")
+    console.print(Panel(explanation, title="Explanation", expand=False))
 
 def interactive_menu():
-    """Menu interativo principal para quando rodar sem argumentos."""
-    console.print(Panel("[bold magenta]Bem-vindo ao AstroLab 🚀[/bold magenta]\nSua ferramenta de estudo com dados reais da NASA.", expand=False))
+    """Main interactive menu when run without arguments."""
+    
+    disclaimer = """[bold yellow]💡 DEMO TIP:[/bold yellow] You are using the interactive menu. 
+You can also run commands directly from your terminal!
+Try: [bold cyan]./astrolab quiz[/bold cyan] or [bold cyan]./astrolab flashcard "mars"[/bold cyan]"""
+    console.print(Panel(disclaimer, border_style="yellow", expand=False))
+    
+    console.print(Panel("[bold magenta]Welcome to AstroLab 🚀[/bold magenta]\nYour study tool powered by real NASA data.", expand=False))
     
     while True:
-        console.print("\n[bold cyan]Escolha uma opção:[/bold cyan]")
-        console.print("1. 🔭 Ver APOD (Astronomy Picture of the Day)")
-        console.print("2. 🧠 Fazer Quiz Espacial (Gerado por IA)")
-        console.print("3. 🃏 Gerar Flashcard (ex: 'Black Hole')")
-        console.print("4. 📊 Ver Histórico de Estudos (Stats)")
-        console.print("5. 🔄 Revisar Flashcards Salvos (Deck)")
-        console.print("6. 🚪 Sair")
+        console.print("\n[bold cyan]Choose an option:[/bold cyan]")
+        console.print("1. 🔭 View APOD (Astronomy Picture of the Day)")
+        console.print("2. 🧠 Take a Space Quiz (AI Generated)")
+        console.print("3. 🃏 Generate a Flashcard (e.g., 'Black Hole')")
+        console.print("4. 📊 View Study Stats & History")
+        console.print("5. 🔄 Review Saved Flashcards (Deck)")
+        console.print("6. 🚪 Exit")
         
-        choice = Prompt.ask("\nSua escolha", choices=["1", "2", "3", "4", "5", "6"])
+        choice = Prompt.ask("\nYour choice", choices=["1", "2", "3", "4", "5", "6"])
         
         if choice == "1":
             show_apod()
@@ -61,7 +67,7 @@ def interactive_menu():
             generator = QuizGenerator()
             generator.run_daily_quiz()
         elif choice == "3":
-            tema = Prompt.ask("Digite o tema em inglês (ex: 'gravity', 'mars')")
+            tema = Prompt.ask("Enter a topic (e.g., 'gravity', 'mars')")
             generator = FlashcardGenerator()
             generator.create_flashcard(tema)
         elif choice == "4":
@@ -69,30 +75,30 @@ def interactive_menu():
         elif choice == "5":
             deck_manager.review_deck()
         elif choice == "6":
-            console.print("[bold green]Até a próxima jornada espacial! 🌌[/bold green]")
+            console.print("[bold green]See you on the next space journey! 🌌[/bold green]")
             sys.exit(0)
 
 def main():
     check_env()
     
     parser = argparse.ArgumentParser(description="AstroLab: Space Pivot 🚀")
-    subparsers = parser.add_subparsers(dest="command", help="Comandos disponíveis")
+    subparsers = parser.add_subparsers(dest="command", help="Available commands")
     
-    # Comando 'apod'
-    subparsers.add_parser("apod", help="Mostra Astronomy Picture of the Day")
+    # Command 'apod'
+    subparsers.add_parser("apod", help="Show Astronomy Picture of the Day")
     
-    # Comando 'quiz'
-    subparsers.add_parser("quiz", help="Gera um quiz interativo de 5 perguntas sobre o APOD do dia")
+    # Command 'quiz'
+    subparsers.add_parser("quiz", help="Generate an interactive 5-question quiz based on today's APOD")
     
-    # Comando 'flashcard'
-    flashcard_parser = subparsers.add_parser("flashcard", help="Cria um flashcard sobre um tema espacial")
-    flashcard_parser.add_argument("tema", type=str, help="Tema para buscar na NASA (ex: 'gravidade', 'black hole')")
+    # Command 'flashcard'
+    flashcard_parser = subparsers.add_parser("flashcard", help="Create a flashcard about a space topic")
+    flashcard_parser.add_argument("tema", type=str, help="Topic to search on NASA (e.g., 'gravity', 'black hole')")
 
-    # Comando 'stats'
-    subparsers.add_parser("stats", help="Mostra o histórico de progresso das suas sessões de estudo")
+    # Command 'stats'
+    subparsers.add_parser("stats", help="Show your study session progress history")
     
-    # Comando 'review'
-    subparsers.add_parser("review", help="Revisa a sua coleção pessoal de flashcards salvos")
+    # Command 'review'
+    subparsers.add_parser("review", help="Review your personal collection of saved flashcards")
     
     args = parser.parse_args()
     
@@ -109,8 +115,9 @@ def main():
     elif args.command == "review":
         deck_manager.review_deck()
     else:
-        # Se não passar argumentos via CLI, abre o menu interativo lindão
+        # If no arguments are passed, open the interactive menu
         interactive_menu()
 
 if __name__ == "__main__":
     main()
+

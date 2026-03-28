@@ -1,0 +1,12 @@
+#!/bin/bash
+# Wrapper script for AstroLab
+
+# Verifies if the virtual environment exists, uses system python otherwise
+if [ -f ".venv/bin/python" ]; then
+    PYTHON=".venv/bin/python"
+else
+    PYTHON="python"
+fi
+
+# Passes any arguments directly to main.py
+$PYTHON main.py "$@"

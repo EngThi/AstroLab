@@ -8,7 +8,7 @@ console = Console()
 DECK_FILE = "data/deck.json"
 
 class DeckManager:
-    """Gerencia a coleção de flashcards salvos."""
+    """Manages the collection of saved flashcards."""
 
     def __init__(self):
         if not os.path.exists("data"):
@@ -19,14 +19,14 @@ class DeckManager:
                 json.dump([], f)
 
     def save_card(self, topic: str, front: str, back: str):
-        """Salva um flashcard gerado no deck pessoal."""
+        """Saves a generated flashcard into the personal deck."""
         try:
             with open(DECK_FILE, "r", encoding="utf-8") as f:
                 deck = json.load(f)
         except json.JSONDecodeError:
             deck = []
 
-        # Evita duplicatas exatas
+        # Avoid exact duplicates
         if not any(card.get('front') == front for card in deck):
             deck.append({
                 "topic": topic,
@@ -37,40 +37,41 @@ class DeckManager:
                 json.dump(deck, f, indent=4, ensure_ascii=False)
 
     def review_deck(self):
-        """Inicia uma sessão de revisão dos flashcards salvos."""
+        """Starts a review session for saved flashcards."""
         try:
             with open(DECK_FILE, "r", encoding="utf-8") as f:
                 deck = json.load(f)
         except (json.JSONDecodeError, FileNotFoundError):
-            console.print("[bold red]Erro ao ler o deck.[/bold red]")
+            console.print("[bold red]Error reading the deck.[/bold red]")
             return
 
         if not deck:
-            console.print("[bold yellow]Seu deck está vazio! Gere alguns flashcards primeiro usando a opção 3 do menu.[/bold yellow]")
+            console.print("[bold yellow]Your deck is empty! Generate some flashcards first using option 3 from the menu.[/bold yellow]")
             return
 
-        console.print(f"\n[bold green]--- 📚 INICIANDO REVISÃO ({len(deck)} cards) ---[/bold green]\n")
+        console.print(f"\n[bold green]--- 📚 STARTING REVIEW ({len(deck)} cards) ---[/bold green]\n")
         
-        # Embaralha os cards para a revisão
+        # Shuffle cards for review
         random.shuffle(deck)
 
         for i, card in enumerate(deck, 1):
-            console.print(f"[bold cyan]Card {i}/{len(deck)} | Tema: {card.get('topic', 'N/A')}[/bold cyan]")
+            console.print(f"[bold cyan]Card {i}/{len(deck)} | Topic: {card.get('topic', 'N/A')}[/bold cyan]")
             
-            front_panel = Panel(card.get("front", ""), title="[bold blue]Frente (Pergunta)[/bold blue]", expand=False)
+            front_panel = Panel(card.get("front", ""), title="[bold blue]Front (Question)[/bold blue]", expand=False)
             console.print(front_panel)
             
-            input("\nPressione ENTER para revelar a resposta...")
+            input("\nPress ENTER to reveal the answer...")
             
-            back_panel = Panel(card.get("back", ""), title="[bold green]Verso (Resposta)[/bold green]", expand=False)
+            back_panel = Panel(card.get("back", ""), title="[bold green]Back (Answer)[/bold green]", expand=False)
             console.print(back_panel)
             
             if i < len(deck):
-                cont = input("\nPressione ENTER para o próximo card ou 'q' para sair da revisão...").strip().lower()
+                cont = input("\nPress ENTER for the next card or 'q' to quit the review...").strip().lower()
                 if cont == 'q':
                     break
             console.print("\n")
             
-        console.print("[bold yellow]--- Fim da Revisão! ---[/bold yellow]\n")
+        console.print("[bold yellow]--- Review Finished! ---[/bold yellow]\n")
 
 deck_manager = DeckManager()
+

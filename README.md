@@ -1,37 +1,40 @@
 # AstroLab (ex-Study-Lab-Core) 🚀
 [![NASA API Powered](https://img.shields.io/badge/NASA-API_Powered-blue)](https://api.nasa.gov/)
 
-Pivot para o desafio Sidequest Challenger. Ferramenta de estudo de astronomia/física que utiliza dados reais da NASA (APOD) e gera perguntas (Flashcards e Quizzes) interativas usando o Google Gemini. O estudo perfeito "entre as aulas"!
+Pivot for the Hack Club Sidequest Challenger. An astronomy/physics study tool that utilizes real NASA data (APOD endpoint) to generate interactive quizzes and flashcards using Google Gemini AI. The perfect tool for studying "between lectures"!
 
-## Funcionalidades
+## Features
 
-- `python main.py apod`: Mostra a "Astronomy Picture of the Day" com explicação.
-- `python main.py quiz`: Gera um quiz interativo de 5 perguntas sobre o APOD do dia usando IA. Inclui o modo **Deep Dive** para aprender com os seus erros!
-- `python main.py flashcard "<tema>"`: Cria um flashcard temático baseado nos dados do espaço e salva automaticamente no seu deck pessoal.
-- `python main.py review`: **[NOVO]** Inicia uma sessão de revisão com todos os flashcards que você gerou e salvou.
-- `python main.py stats`: Exibe o seu histórico de progresso de estudo com gráficos de barras estilizados no terminal! Acompanhe sua evolução e acertos em cada sessão.
+- `python main.py apod`: Shows the "Astronomy Picture of the Day" with a detailed explanation.
+- `python main.py quiz`: Generates an interactive 5-question quiz based on the daily APOD using AI. Includes a **Deep Dive** mode to learn from your mistakes!
+- `python main.py flashcard "<topic>"`: Creates a thematic flashcard based on space data and automatically saves it to your personal deck.
+- `python main.py review`: Starts a review session with all the flashcards you have generated and saved.
+- `python main.py stats`: Displays your study progress history with stylized bar charts in the terminal! Track your performance and accuracy across sessions.
 
-## Quick Start
+## 💡 Quick Start (For Reviewers)
 
-1. Clone o repositório e instale as dependências:
+To make testing as frictionless as possible, **we provide an easy-to-use executable and an Offline Demo Mode**.
+
+1. Clone the repository and install dependencies:
 ```bash
 pip install -r requirements.txt
 ```
 
-2. Configure as credenciais:
+2. **[OPTIONAL]** To use the fully dynamic AI generation, configure your credentials:
 ```bash
 cp .env.example .env
-# Edite o arquivo .env e coloque as chaves (NASA_API_KEY e GEMINI_API_KEY)
+# Edit the .env file and add your keys (NASA_API_KEY and GEMINI_API_KEY)
 ```
+*Note: If you don't configure an `.env`, the system will use a `DEMO_KEY` for NASA and safely fallback to our **Smart Demo Mode** for Gemini, pulling rich pre-generated responses from `data/demo_cache.json`.*
 
-3. Explore o espaço (agora com menu interativo!):
+3. Explore space with our beautiful interactive menu by running the init script:
 ```bash
-python main.py
+./astrolab
 ```
 
-## Arquitetura e Tech Stack
+## Architecture and Tech Stack
 
-- **NASA APOD API:** Fornece os dados base do dia.
-- **Google Gemini API:** Gera e avalia perguntas com base no contexto espacial e cria Deep Dives.
-- **Python / Rich:** Interface CLI rica em recursos visuais.
-- **Armazenamento:** Histórico e Deck de Flashcards persistidos localmente via JSON em `data/`.
+- **NASA APOD API:** Provides the foundational space data.
+- **Google Gemini API:** Generates and evaluates questions based on space context and creates Deep Dives.
+- **Python / Rich:** CLI interface with beautiful visual components.
+- **Storage:** Study history and Flashcard Deck persisted locally via JSON in `data/`.

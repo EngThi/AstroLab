@@ -1,5 +1,6 @@
 from src.nasa_client import nasa_client
 from src.gemini_client import gemini_client
+from src.deck import deck_manager
 from rich.console import Console
 from rich.panel import Panel
 
@@ -23,6 +24,11 @@ class FlashcardGenerator:
             flashcard = gemini_client.generate_flashcard(topic, context)
             
         self.display_flashcard(flashcard, nasa_data.get("title"))
+        
+        # Salva o card gerado no deck do usuário
+        if "front" in flashcard and "back" in flashcard:
+            deck_manager.save_card(topic, flashcard["front"], flashcard["back"])
+            console.print("[dim]Card salvo automaticamente no seu deck! Use o menu para revisar depois.[/dim]\n")
 
     def display_flashcard(self, flashcard: dict, context_title: str):
         """Mostra o flashcard de forma interativa no terminal."""
@@ -36,3 +42,4 @@ class FlashcardGenerator:
         back_panel = Panel(flashcard.get("back", ""), title="[bold green]Verso (Resposta)[/bold green]", expand=False)
         console.print(back_panel)
         console.print("\n")
+

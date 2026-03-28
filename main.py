@@ -8,6 +8,7 @@ from src.nasa_client import nasa_client
 from src.flashcard import FlashcardGenerator
 from src.quiz import QuizGenerator
 from src.session import session_manager
+from src.deck import deck_manager
 from dotenv import load_dotenv
 
 console = Console()
@@ -49,9 +50,10 @@ def interactive_menu():
         console.print("2. 🧠 Fazer Quiz Espacial (Gerado por IA)")
         console.print("3. 🃏 Gerar Flashcard (ex: 'Black Hole')")
         console.print("4. 📊 Ver Histórico de Estudos (Stats)")
-        console.print("5. 🚪 Sair")
+        console.print("5. 🔄 Revisar Flashcards Salvos (Deck)")
+        console.print("6. 🚪 Sair")
         
-        choice = Prompt.ask("\nSua escolha", choices=["1", "2", "3", "4", "5"])
+        choice = Prompt.ask("\nSua escolha", choices=["1", "2", "3", "4", "5", "6"])
         
         if choice == "1":
             show_apod()
@@ -65,6 +67,8 @@ def interactive_menu():
         elif choice == "4":
             session_manager.show_stats()
         elif choice == "5":
+            deck_manager.review_deck()
+        elif choice == "6":
             console.print("[bold green]Até a próxima jornada espacial! 🌌[/bold green]")
             sys.exit(0)
 
@@ -87,6 +91,9 @@ def main():
     # Comando 'stats'
     subparsers.add_parser("stats", help="Mostra o histórico de progresso das suas sessões de estudo")
     
+    # Comando 'review'
+    subparsers.add_parser("review", help="Revisa a sua coleção pessoal de flashcards salvos")
+    
     args = parser.parse_args()
     
     if args.command == "apod":
@@ -99,6 +106,8 @@ def main():
         generator.create_flashcard(args.tema)
     elif args.command == "stats":
         session_manager.show_stats()
+    elif args.command == "review":
+        deck_manager.review_deck()
     else:
         # Se não passar argumentos via CLI, abre o menu interativo lindão
         interactive_menu()

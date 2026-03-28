@@ -1,0 +1,49 @@
+{
+    "quizzes": [
+        [
+            {
+                "question": "O que causa a emissão de raios-X em buracos negros supermassivos, como observado em galáxias ativas?",
+                "options": ["A) Fusão nuclear no centro do buraco negro.", "B) O atrito extremo no disco de acreção ao redor do buraco negro.", "C) Emissão térmica direta da singularidade.", "D) Decaimento radioativo da matéria escura."],
+                "answer": "B) O atrito extremo no disco de acreção ao redor do buraco negro.",
+                "explanation": "À medida que a matéria gira em espiral em direção ao buraco negro, a fricção no disco de acreção aquece o material a milhões de graus, emitindo forte radiação de raios-X antes de cruzar o horizonte de eventos."
+            },
+            {
+                "question": "Se um relógio fosse enviado para a borda do horizonte de eventos de um buraco negro, o que um observador distante veria?",
+                "options": ["A) O relógio andaria mais rápido.", "B) O relógio pararia completamente.", "C) O relógio andaria mais devagar devido à dilatação temporal.", "D) O relógio retrocederia no tempo."],
+                "answer": "C) O relógio andaria mais devagar devido à dilatação temporal.",
+                "explanation": "A Relatividade Geral de Einstein postula que a gravidade extrema curva o espaço-tempo, causando o fenômeno da dilatação do tempo gravitacional; quanto maior a gravidade, mais lento o tempo passa relativo a um observador distante."
+            },
+            {
+                "question": "As manchas solares (Solar Flares) são frequentemente associadas a qual fenômeno magnético no Sol?",
+                "options": ["A) Enfraquecimento do núcleo solar.", "B) Reconexão de linhas de campo magnético super-torcidas.", "C) Impacto de asteroides na superfície solar.", "D) Queda na temperatura da coroa solar."],
+                "answer": "B) Reconexão de linhas de campo magnético super-torcidas.",
+                "explanation": "Explosões solares (Flares) ocorrem quando a energia magnética que se acumulou na atmosfera solar é repentinamente liberada, um processo físico complexo conhecido como reconexão magnética."
+            },
+            {
+                "question": "Qual é a principal composição atmosférica da lua Titã (de Saturno)?",
+                "options": ["A) Oxigênio e Dióxido de Carbono.", "B) Metano e Hidrogênio.", "C) Nitrogênio e Metano.", "D) Dióxido de Enxofre e Ácido Sulfúrico."],
+                "answer": "C) Nitrogênio e Metano.",
+                "explanation": "Titã é a única lua do sistema solar com uma atmosfera densa, composta principalmente de Nitrogênio (como a Terra) com uma proporção significativa de Metano, que forma nuvens e chuva líquida em sua superfície fria."
+            },
+            {
+                "question": "O Efeito Doppler na luz de estrelas distantes nos diz o quê sobre o universo?",
+                "options": ["A) A composição química da estrela.", "B) Se a estrela ou galáxia está se afastando ou se aproximando de nós.", "C) A massa exata do núcleo galáctico.", "D) A idade precisa da estrela observada."],
+                "answer": "B) Se a estrela ou galáxia está se afastando ou se aproximando de nós.",
+                "explanation": "O desvio para o vermelho (Redshift) ou desvio para o azul (Blueshift) na luz devido ao efeito Doppler astronômico indica a velocidade radial de um objeto em relação à Terra, uma prova fundamental da expansão do Universo."
+            }
+        ]
+    ],
+    "deep_dives": [
+        "## 🧠 Deep Dive no Cosmos (Modo Offline)\n\nParece que alguns conceitos espaciais ficaram pelo caminho! Vamos revisar com uma lente mais didática.\n\n**1. Dilatação Temporal Gravitacional**\nImagine que o espaço-tempo é uma cama elástica elástica. Um objeto massivo, como um Buraco Negro, cria um buraco fundo nessa cama elástica. A gravidade nada mais é do que essa 'curvatura'. Einstein descobriu que o tempo passa mais devagar onde a gravidade é mais forte. Então, se você estivesse perto do Buraco Negro, seu relógio faria 'tic-tac' normalmente para você, mas para um observador na Terra, você pareceria estar se movendo em câmera lenta!\n\n**2. Efeito Doppler**\nSabe quando uma ambulância passa por você e o som da sirene vai de agudo (quando se aproxima) para grave (quando se afasta)? Com a luz acontece a mesma coisa no universo! Se uma galáxia está se afastando de nós, as ondas de luz são 'esticadas', parecendo mais vermelhas (Redshift). É assim que sabemos que o universo está em expansão!\n\n*Nota: Esta é uma explicação offline simulada. Configure a GEMINI_API_KEY para aprofundamentos personalizados baseados nos seus erros específicos.*"
+    ],
+    "flashcards": {
+        "gravidade": {
+            "front": "Como Einstein descreveu a gravidade em sua Teoria da Relatividade Geral?",
+            "back": "Não como uma força puxando objetos, mas como uma distorção (curvatura) do próprio tecido do Espaço-Tempo causada por objetos massivos."
+        },
+        "default": {
+            "front": "O que é o Horizonte de Eventos de um buraco negro?",
+            "back": "A fronteira ao redor do buraco negro onde a velocidade de escape supera a velocidade da luz. Nada que passa por essa fronteira pode retornar."
+        }
+    }
+}

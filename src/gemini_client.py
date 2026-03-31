@@ -15,9 +15,9 @@ class GeminiClient:
     """Client for Google Gemini API with smart fallback for demonstrations."""
     
     def __init__(self):
-        # Uses gemini-1.5-flash for quick text tasks
+        # Uses gemini-2.5-flash for quick text tasks
         if GEMINI_API_KEY:
-            self.model = genai.GenerativeModel('gemini-1.5-flash')
+            self.model = genai.GenerativeModel('gemini-2.5-flash')
         else:
             self.model = None
             

@@ -1,49 +1,49 @@
-{
-    "quizzes": [
+{    "quizzes": [
         [
             {
-                "question": "O que causa a emissão de raios-X em buracos negros supermassivos, como observado em galáxias ativas?",
-                "options": ["A) Fusão nuclear no centro do buraco negro.", "B) O atrito extremo no disco de acreção ao redor do buraco negro.", "C) Emissão térmica direta da singularidade.", "D) Decaimento radioativo da matéria escura."],
-                "answer": "B) O atrito extremo no disco de acreção ao redor do buraco negro.",
-                "explanation": "À medida que a matéria gira em espiral em direção ao buraco negro, a fricção no disco de acreção aquece o material a milhões de graus, emitindo forte radiação de raios-X antes de cruzar o horizonte de eventos."
+                "question": "What causes the emission of X-rays in supermassive black holes, as observed in active galaxies?",
+                "options": ["A) Nuclear fusion in the center of the black hole.", "B) Direct thermal emission from the singularity.", "C) Radioactive decay of dark matter.", "D) Extreme friction in the accretion disk around the black hole."],
+                "answer": "D) Extreme friction in the accretion disk around the black hole.",
+                "explanation": "As matter spirals towards the black hole, friction in the accretion disk heats the material to millions of degrees, emitting strong X-ray radiation before crossing the event horizon."
             },
             {
-                "question": "Se um relógio fosse enviado para a borda do horizonte de eventos de um buraco negro, o que um observador distante veria?",
-                "options": ["A) O relógio andaria mais rápido.", "B) O relógio pararia completamente.", "C) O relógio andaria mais devagar devido à dilatação temporal.", "D) O relógio retrocederia no tempo."],
-                "answer": "C) O relógio andaria mais devagar devido à dilatação temporal.",
-                "explanation": "A Relatividade Geral de Einstein postula que a gravidade extrema curva o espaço-tempo, causando o fenômeno da dilatação do tempo gravitacional; quanto maior a gravidade, mais lento o tempo passa relativo a um observador distante."
+                "question": "If a clock were sent to the edge of the event horizon of a black hole, what would a distant observer see?",
+                "options": ["A) The clock would run faster.", "B) The clock would run slower due to time dilation.", "C) The clock would stop completely.", "D) The clock would run backward in time."],
+                "answer": "B) The clock would run slower due to time dilation.",
+                "explanation": "Einstein's General Relativity postulates that extreme gravity curves space-time, causing the phenomenon of gravitational time dilation; the greater the gravity, the slower time passes relative to a distant observer."
             },
             {
-                "question": "As manchas solares (Solar Flares) são frequentemente associadas a qual fenômeno magnético no Sol?",
-                "options": ["A) Enfraquecimento do núcleo solar.", "B) Reconexão de linhas de campo magnético super-torcidas.", "C) Impacto de asteroides na superfície solar.", "D) Queda na temperatura da coroa solar."],
-                "answer": "B) Reconexão de linhas de campo magnético super-torcidas.",
-                "explanation": "Explosões solares (Flares) ocorrem quando a energia magnética que se acumulou na atmosfera solar é repentinamente liberada, um processo físico complexo conhecido como reconexão magnética."
+                "question": "Solar Flares are often associated with which magnetic phenomenon on the Sun?",
+                "options": ["A) Weakening of the solar core.", "B) Reconnection of super-twisted magnetic field lines.", "C) Asteroid impact on the solar surface.", "D) Drop in the temperature of the solar corona."],
+                "answer": "B) Reconnection of super-twisted magnetic field lines.",
+                "explanation": "Solar flares occur when magnetic energy that has built up in the solar atmosphere is suddenly released, a complex physical process known as magnetic reconnection."
             },
             {
-                "question": "Qual é a principal composição atmosférica da lua Titã (de Saturno)?",
-                "options": ["A) Oxigênio e Dióxido de Carbono.", "B) Metano e Hidrogênio.", "C) Nitrogênio e Metano.", "D) Dióxido de Enxofre e Ácido Sulfúrico."],
-                "answer": "C) Nitrogênio e Metano.",
-                "explanation": "Titã é a única lua do sistema solar com uma atmosfera densa, composta principalmente de Nitrogênio (como a Terra) com uma proporção significativa de Metano, que forma nuvens e chuva líquida em sua superfície fria."
+                "question": "What is the primary atmospheric composition of Saturn's moon Titan?",
+                "options": ["A) Nitrogen and Methane.", "B) Methane and Hydrogen.", "C) Oxygen and Carbon Dioxide.", "D) Sulfur Dioxide and Sulfuric Acid."],
+                "answer": "A) Nitrogen and Methane.",
+                "explanation": "Titan is the only moon in the solar system with a dense atmosphere, composed mainly of Nitrogen (like Earth) with a significant proportion of Methane, which forms clouds and liquid rain on its cold surface."
             },
             {
-                "question": "O Efeito Doppler na luz de estrelas distantes nos diz o quê sobre o universo?",
-                "options": ["A) A composição química da estrela.", "B) Se a estrela ou galáxia está se afastando ou se aproximando de nós.", "C) A massa exata do núcleo galáctico.", "D) A idade precisa da estrela observada."],
-                "answer": "B) Se a estrela ou galáxia está se afastando ou se aproximando de nós.",
-                "explanation": "O desvio para o vermelho (Redshift) ou desvio para o azul (Blueshift) na luz devido ao efeito Doppler astronômico indica a velocidade radial de um objeto em relação à Terra, uma prova fundamental da expansão do Universo."
+                "question": "What does the Doppler Effect in the light from distant stars tell us about the universe?",
+                "options": ["A) The exact mass of the galactic core.", "B) The chemical composition of the star.", "C) Whether the star or galaxy is moving away from or towards us.", "D) The precise age of the observed star."],
+                "answer": "C) Whether the star or galaxy is moving away from or towards us.",
+                "explanation": "The Redshift or Blueshift in light due to the astronomical Doppler effect indicates the radial velocity of an object relative to Earth, fundamental proof of the expanding Universe."
             }
         ]
     ],
     "deep_dives": [
-        "## 🧠 Deep Dive no Cosmos (Modo Offline)\n\nParece que alguns conceitos espaciais ficaram pelo caminho! Vamos revisar com uma lente mais didática.\n\n**1. Dilatação Temporal Gravitacional**\nImagine que o espaço-tempo é uma cama elástica elástica. Um objeto massivo, como um Buraco Negro, cria um buraco fundo nessa cama elástica. A gravidade nada mais é do que essa 'curvatura'. Einstein descobriu que o tempo passa mais devagar onde a gravidade é mais forte. Então, se você estivesse perto do Buraco Negro, seu relógio faria 'tic-tac' normalmente para você, mas para um observador na Terra, você pareceria estar se movendo em câmera lenta!\n\n**2. Efeito Doppler**\nSabe quando uma ambulância passa por você e o som da sirene vai de agudo (quando se aproxima) para grave (quando se afasta)? Com a luz acontece a mesma coisa no universo! Se uma galáxia está se afastando de nós, as ondas de luz são 'esticadas', parecendo mais vermelhas (Redshift). É assim que sabemos que o universo está em expansão!\n\n*Nota: Esta é uma explicação offline simulada. Configure a GEMINI_API_KEY para aprofundamentos personalizados baseados nos seus erros específicos.*"
+        "## 🧠 Deep Dive into the Cosmos (Offline Mode)\n\nIt looks like a few space concepts slipped by! Let's review them with a more educational lens.\n\n**1. Gravitational Time Dilation**\nImagine space-time is a stretchy trampoline. A massive object, like a Black Hole, creates a deep hole in this trampoline. Gravity is nothing more than this 'curvature'. Einstein discovered that time passes slower where gravity is strongest. So, if you were near the Black Hole, your watch would 'tick-tock' normally to you, but to an observer on Earth, you would appear to be moving in slow motion!\n\n**2. Doppler Effect**\nYou know when an ambulance passes by you and the sound of the siren goes from high-pitched (when approaching) to low-pitched (when moving away)? The same thing happens with light in the universe! If a galaxy is moving away from us, the light waves are 'stretched', appearing redder (Redshift). This is how we know the universe is expanding!\n\n*Note: This is a simulated offline explanation. Configure the GEMINI_API_KEY for personalized deep dives based on your specific mistakes.*"
     ],
     "flashcards": {
-        "gravidade": {
-            "front": "Como Einstein descreveu a gravidade em sua Teoria da Relatividade Geral?",
-            "back": "Não como uma força puxando objetos, mas como uma distorção (curvatura) do próprio tecido do Espaço-Tempo causada por objetos massivos."
+        "gravity": {
+            "front": "How did Einstein describe gravity in his Theory of General Relativity?",
+            "back": "Not as a force pulling objects, but as a distortion (curvature) of the very fabric of Space-Time caused by massive objects."
         },
         "default": {
-            "front": "O que é o Horizonte de Eventos de um buraco negro?",
-            "back": "A fronteira ao redor do buraco negro onde a velocidade de escape supera a velocidade da luz. Nada que passa por essa fronteira pode retornar."
+            "front": "What is the Event Horizon of a black hole?",
+            "back": "The boundary around the black hole where the escape velocity exceeds the speed of light. Nothing that passes this boundary can return."
         }
     }
 }
+

@@ -1,4 +1,4 @@
-# AstroLab (ex-Study-Lab-Core) 🚀
+# AstroLab 🚀
 [![NASA API Powered](https://img.shields.io/badge/NASA-API_Powered-blue)](https://api.nasa.gov/)
 
 Pivot for the Hack Club Sidequest Challenger. An astronomy/physics study tool that utilizes real NASA data (APOD endpoint) to generate interactive quizzes and flashcards using Google Gemini AI. The perfect tool for studying "between lectures"!

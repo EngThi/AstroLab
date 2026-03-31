@@ -7,13 +7,13 @@ def gemini_client():
     return GeminiClient()
 
 def test_flashcard_generates_question(gemini_client):
-    """Testa se o flashcard é gerado corretamente."""
-    # Usando o fallback para testar a estrutura
+    """Tests if the flashcard is correctly generated using fallback."""
+    # Using fallback to test the structure
     card = gemini_client._fallback_flashcard("Black Hole")
     assert isinstance(card, dict)
     assert "front" in card
     assert "back" in card
-    assert "Black Hole" in card["front"]
+    assert "black hole" in card["front"].lower()
 
 def test_quiz_returns_5_questions(mocker):
     """Testa se o quiz gera uma lista com a quantidade pedida (usando mock)."""

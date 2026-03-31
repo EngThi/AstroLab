@@ -3,3 +3,6 @@ __pycache__/
 *.pyc
 arquivo_antigo/
 TESTES/
+GEMINI.md
+LEMBRAR.txt
+.pytest_cache/

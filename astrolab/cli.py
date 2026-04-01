@@ -4,11 +4,11 @@ import sys
 from rich.console import Console
 from rich.panel import Panel
 from rich.prompt import Prompt
-from src.nasa_client import nasa_client
-from src.flashcard import FlashcardGenerator
-from src.quiz import QuizGenerator
-from src.session import session_manager
-from src.deck import deck_manager
+from astrolab.nasa_client import nasa_client
+from astrolab.flashcard import FlashcardGenerator
+from astrolab.quiz import QuizGenerator
+from astrolab.session import session_manager
+from astrolab.deck import deck_manager
 from dotenv import load_dotenv
 
 console = Console()

@@ -1,17 +1,21 @@
 import json
 import os
+from pathlib import Path
 from datetime import datetime
 from rich.console import Console
 from rich.table import Table
 
 console = Console()
-SESSION_FILE = "data/sessions/history.json"
+
+ASTROLAB_DIR = Path.home() / ".astrolab"
+SESSION_FILE = ASTROLAB_DIR / "history.json"
 
 class SessionManager:
     """Manages the history of study sessions (quizzes)."""
 
     def __init__(self):
         # Ensures the file exists
+        os.makedirs(ASTROLAB_DIR, exist_ok=True)
         if not os.path.exists(SESSION_FILE):
             with open(SESSION_FILE, "w", encoding="utf-8") as f:
                 json.dump([], f)

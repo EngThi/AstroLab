@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "astrolab-cli"
+version = "1.0.0"
+authors = [
+  { name="EngThi", email="stevebatista120@gmail.com" },
+]
+description = "AstroLab: A Space-themed study CLI tool using real NASA data and Google Gemini AI."
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Environment :: Console",
+]
+dependencies = [
+    "requests>=2.31.0",
+    "google-generativeai>=0.8.3",
+    "python-dotenv>=1.0.1",
+    "rich>=13.9.4"
+]
+
+[project.scripts]
+astrolab = "astrolab.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["astrolab*"]
+
+[tool.setuptools.package-data]
+astrolab = ["demo_cache.json"]

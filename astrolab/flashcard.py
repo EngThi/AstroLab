@@ -1,6 +1,6 @@
-from src.nasa_client import nasa_client
-from src.gemini_client import gemini_client
-from src.deck import deck_manager
+from astrolab.nasa_client import nasa_client
+from astrolab.gemini_client import gemini_client
+from astrolab.deck import deck_manager
 from rich.console import Console
 from rich.panel import Panel
 

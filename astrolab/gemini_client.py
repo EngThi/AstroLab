@@ -25,8 +25,9 @@ class GeminiClient:
 
     def _load_demo_cache(self):
         """Loads cached data for offline demonstration."""
+        cache_path = os.path.join(os.path.dirname(__file__), "demo_cache.json")
         try:
-            with open("data/demo_cache.json", "r", encoding="utf-8") as f:
+            with open(cache_path, "r", encoding="utf-8") as f:
                 self.demo_data = json.load(f)
         except (FileNotFoundError, json.JSONDecodeError):
             self.demo_data = {"quizzes": [], "deep_dives": [], "flashcards": {}}

@@ -1,5 +1,5 @@
 import pytest
-from src.nasa_client import NasaAPIClient
+from astrolab.nasa_client import NasaAPIClient
 
 @pytest.fixture
 def mock_nasa_client(mocker):

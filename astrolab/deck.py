@@ -1,18 +1,19 @@
 import json
 import os
 import random
+from pathlib import Path
 from rich.console import Console
 from rich.panel import Panel
 
 console = Console()
-DECK_FILE = "data/deck.json"
+ASTROLAB_DIR = Path.home() / ".astrolab"
+DECK_FILE = ASTROLAB_DIR / "deck.json"
 
 class DeckManager:
     """Manages the collection of saved flashcards."""
 
     def __init__(self):
-        if not os.path.exists("data"):
-            os.makedirs("data", exist_ok=True)
+        os.makedirs(ASTROLAB_DIR, exist_ok=True)
             
         if not os.path.exists(DECK_FILE):
             with open(DECK_FILE, "w", encoding="utf-8") as f:

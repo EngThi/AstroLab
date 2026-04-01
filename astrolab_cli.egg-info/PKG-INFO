@@ -1,0 +1,56 @@
+Metadata-Version: 2.4
+Name: astrolab-cli
+Version: 1.0.0
+Summary: AstroLab: A Space-themed study CLI tool using real NASA data and Google Gemini AI.
+Author-email: EngThi <stevebatista120@gmail.com>
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Environment :: Console
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Requires-Dist: requests>=2.31.0
+Requires-Dist: google-generativeai>=0.8.3
+Requires-Dist: python-dotenv>=1.0.1
+Requires-Dist: rich>=13.9.4
+
+# AstroLab 🚀
+[![NASA API Powered](https://img.shields.io/badge/NASA-API_Powered-blue)](https://api.nasa.gov/)
+
+Pivot for the Hack Club Sidequest Challenger. An astronomy/physics study tool that utilizes real NASA data (APOD endpoint) to generate interactive quizzes and flashcards using Google Gemini AI. The perfect tool for studying "between lectures"!
+
+## Features
+
+- `python main.py apod`: Shows the "Astronomy Picture of the Day" with a detailed explanation.
+- `python main.py quiz`: Generates an interactive 5-question quiz based on the daily APOD using AI. Includes a **Deep Dive** mode to learn from your mistakes!
+- `python main.py flashcard "<topic>"`: Creates a thematic flashcard based on space data and automatically saves it to your personal deck.
+- `python main.py review`: Starts a review session with all the flashcards you have generated and saved.
+- `python main.py stats`: Displays your study progress history with stylized bar charts in the terminal! Track your performance and accuracy across sessions.
+
+## 💡 Quick Start (For Reviewers)
+
+To make testing as frictionless as possible, **we provide an easy-to-use executable and an Offline Demo Mode**.
+
+1. Clone the repository and install dependencies:
+```bash
+pip install -r requirements.txt
+```
+
+2. **[OPTIONAL]** To use the fully dynamic AI generation, configure your credentials:
+```bash
+cp .env.example .env
+# Edit the .env file and add your keys (NASA_API_KEY and GEMINI_API_KEY)
+```
+*Note: If you don't configure an `.env`, the system will use a `DEMO_KEY` for NASA and safely fallback to our **Smart Demo Mode** for Gemini, pulling rich pre-generated responses from `data/demo_cache.json`.*
+
+3. Explore space with our beautiful interactive menu by running the init script:
+```bash
+./astrolab
+```
+
+## Architecture and Tech Stack
+
+- **NASA APOD API:** Provides the foundational space data.
+- **Google Gemini API:** Generates and evaluates questions based on space context and creates Deep Dives.
+- **Python / Rich:** CLI interface with beautiful visual components.
+- **Storage:** Study history and Flashcard Deck persisted locally via JSON in `data/`.

@@ -1,5 +1,5 @@
 import pytest
-from src.gemini_client import GeminiClient
+from astrolab.gemini_client import GeminiClient
 
 @pytest.fixture
 def gemini_client():

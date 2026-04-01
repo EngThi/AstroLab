@@ -5,31 +5,31 @@ Pivot for the Hack Club Sidequest Challenger. An astronomy/physics study tool th
 
 ## Features
 
-- `python main.py apod`: Shows the "Astronomy Picture of the Day" with a detailed explanation.
-- `python main.py quiz`: Generates an interactive 5-question quiz based on the daily APOD using AI. Includes a **Deep Dive** mode to learn from your mistakes!
-- `python main.py flashcard "<topic>"`: Creates a thematic flashcard based on space data and automatically saves it to your personal deck.
-- `python main.py review`: Starts a review session with all the flashcards you have generated and saved.
-- `python main.py stats`: Displays your study progress history with stylized bar charts in the terminal! Track your performance and accuracy across sessions.
+- `astrolab apod`: Shows the "Astronomy Picture of the Day" with a detailed explanation.
+- `astrolab quiz`: Generates an interactive 5-question quiz based on the daily APOD using AI. Includes a **Deep Dive** mode to learn from your mistakes!
+- `astrolab flashcard "<topic>"`: Creates a thematic flashcard based on space data and automatically saves it to your personal deck.
+- `astrolab review`: **[NOVO]** Starts a review session with all the flashcards you have generated and saved.
+- `astrolab stats`: Displays your study progress history with stylized bar charts in the terminal! Track your performance and accuracy across sessions.
 
 ## 💡 Quick Start (For Reviewers)
 
-To make testing as frictionless as possible, **we provide an easy-to-use executable and an Offline Demo Mode**.
+**AstroLab is now published on PyPI for a frictionless testing experience!**
 
-1. Clone the repository and install dependencies:
+1. Install the package globally via pip:
 ```bash
-pip install -r requirements.txt
+pip install astrolab-cli
 ```
 
-2. **[OPTIONAL]** To use the fully dynamic AI generation, configure your credentials:
+2. **[OPTIONAL]** To use the fully dynamic AI generation, configure your credentials by creating a `.env` file in your working directory:
 ```bash
-cp .env.example .env
-# Edit the .env file and add your keys (NASA_API_KEY and GEMINI_API_KEY)
+NASA_API_KEY=your_key_here
+GEMINI_API_KEY=your_key_here
 ```
-*Note: If you don't configure an `.env`, the system will use a `DEMO_KEY` for NASA and safely fallback to our **Smart Demo Mode** for Gemini, pulling rich pre-generated responses from `data/demo_cache.json`.*
+*Note: If you don't configure an `.env`, the system will use a `DEMO_KEY` for NASA and safely fallback to our **Smart Demo Mode** for Gemini, pulling rich pre-generated responses from an internal cache.*
 
-3. Explore space with our beautiful interactive menu by running the init script:
+3. Explore space with our beautiful interactive menu by running:
 ```bash
-./astrolab
+astrolab
 ```
 
 ## Architecture and Tech Stack

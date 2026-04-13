@@ -5,4 +5,4 @@ arquivo_antigo/
 TESTES/
 GEMINI.md
 LEMBRAR.txt
-.pytest_cache/
+.pytest_cache/dist/

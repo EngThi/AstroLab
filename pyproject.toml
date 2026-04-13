@@ -4,9 +4,9 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "astrolab-cli"
-version = "1.0.0"
+version = "1.0.1"
 authors = [
-  { name="EngThi", email="stevebatista120@gmail.com" },
+  { name="EngThi" },
 ]
 description = "AstroLab: A Space-themed study CLI tool using real NASA data and Google Gemini AI."
 readme = "README.md"

@@ -2,24 +2,25 @@ import os
 import requests
 from dotenv import load_dotenv
 
-# Carrega variáveis de ambiente do .env
-load_dotenv()
+# Load environment variables from the current working directory's .env file
+load_dotenv(os.path.join(os.getcwd(), '.env'))
 
 NASA_API_KEY = os.getenv("NASA_API_KEY", "DEMO_KEY")
 APOD_URL = "https://api.nasa.gov/planetary/apod"
 
 class NasaAPIClient:
-    """Cliente para a API da NASA."""
+    """Client for the NASA API."""
     
-    def __init__(self, api_key: str = NASA_API_KEY):
-        self.api_key = api_key
+    def __init__(self, api_key: str = None):
+        # We evaluate the env var here again just in case it was loaded later
+        self.api_key = api_key or os.getenv("NASA_API_KEY", "DEMO_KEY")
         
     def get_apod(self) -> dict:
         """
-        Busca a Astronomy Picture of the Day (APOD).
+        Fetches the Astronomy Picture of the Day (APOD).
         
         Returns:
-            dict: Dados da APOD (title, explanation, url, etc).
+            dict: APOD data (title, explanation, url, etc).
         """
         params = {"api_key": self.api_key}
         response = requests.get(APOD_URL, params=params)
@@ -28,13 +29,13 @@ class NasaAPIClient:
         
     def search_image(self, query: str) -> dict:
         """
-        Busca imagens na biblioteca da NASA (ex: para flashcards temáticos).
+        Searches for images in the NASA library (e.g., for thematic flashcards).
         
         Args:
-            query: Termo de busca (ex: 'black hole').
+            query: Search term (e.g., 'black hole').
             
         Returns:
-            dict: O primeiro item de resultado válido ou None.
+            dict: The first valid result item or None.
         """
         search_url = "https://images-api.nasa.gov/search"
         params = {"q": query, "media_type": "image"}
@@ -43,17 +44,18 @@ class NasaAPIClient:
         
         items = response.json().get("collection", {}).get("items", [])
         if items:
-            # Retorna o primeiro resultado relevante simplificado
+            # Returns the first relevant simplified result
             data = items[0].get("data", [{}])[0]
             links = items[0].get("links", [{}])
             image_url = links[0].get("href", "") if links else ""
             
             return {
-                "title": data.get("title", "Sem título"),
-                "explanation": data.get("description", "Sem descrição"),
+                "title": data.get("title", "Untitled"),
+                "explanation": data.get("description", "No description"),
                 "url": image_url
             }
         return {}
 
-# Instância padrão para uso simplificado
+# Default instance for simplified use
 nasa_client = NasaAPIClient()
+

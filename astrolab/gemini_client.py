@@ -4,19 +4,17 @@ import random
 import google.generativeai as genai
 from dotenv import load_dotenv
 
-load_dotenv()
-
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-
-if GEMINI_API_KEY:
-    genai.configure(api_key=GEMINI_API_KEY)
+# Explicitly load .env from the directory where the user runs the command
+load_dotenv(os.path.join(os.getcwd(), '.env'))
 
 class GeminiClient:
     """Client for Google Gemini API with smart fallback for demonstrations."""
     
     def __init__(self):
         # Uses gemini-2.5-flash for quick text tasks
-        if GEMINI_API_KEY:
+        api_key = os.getenv("GEMINI_API_KEY")
+        if api_key:
+            genai.configure(api_key=api_key)
             self.model = genai.GenerativeModel('gemini-2.5-flash')
         else:
             self.model = None

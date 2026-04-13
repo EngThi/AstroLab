@@ -15,7 +15,7 @@ console = Console()
 
 def check_env():
     """Checks if the .env file is configured."""
-    load_dotenv()
+    load_dotenv(os.path.join(os.getcwd(), '.env'))
     if not os.getenv("NASA_API_KEY"):
         console.print("[bold red]⚠️ Warning: NASA_API_KEY not found.[/bold red]")
         console.print("Please create a [bold white].env[/bold white] file (use .env.example as a template).")

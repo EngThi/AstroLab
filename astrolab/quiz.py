@@ -12,7 +12,7 @@ class QuizGenerator:
     
     def run_daily_quiz(self):
         """Fetches the APOD and generates an interactive 5-question quiz."""
-        with console.status("[bold cyan]Fetching Astronomy Picture of the Day (APOD)..."):
+        with console.status("[bold cyan]Fetching today's NASA APOD data to use as study context for your quiz..."):
             try:
                 apod_data = nasa_client.get_apod()
             except Exception as e:
@@ -22,9 +22,9 @@ class QuizGenerator:
         title = apod_data.get("title", "Unknown")
         explanation = apod_data.get("explanation", "")
         
-        console.print(Panel(f"[italic]{explanation}[/italic]", title=f"🔭 {title}"))
+        console.print(Panel(f"[italic]{explanation}[/italic]", title=f"Context: {title}"))
         
-        with console.status("[bold magenta]AI generating 5 questions based on the text above..."):
+        with console.status("[bold magenta]Generating 5 questions based on the text above..."):
             questions = gemini_client.generate_quiz(explanation, num_questions=5)
             
         if not questions:
@@ -36,7 +36,7 @@ class QuizGenerator:
     def _execute_quiz(self, questions: list, topic_title: str):
         score = 0
         wrong_answers = []
-        console.print("\n[bold green]--- 🚀 STARTING SPACE QUIZ ---[/bold green]\n")
+        console.print("\n[bold green]--- STARTING SPACE QUIZ ---[/bold green]\n")
         
         for i, q in enumerate(questions, 1):
             console.print(f"[bold cyan]Question {i}:[/bold cyan] {q.get('question')}")
@@ -50,10 +50,10 @@ class QuizGenerator:
             correct_letter = correct_answer[0].upper() if correct_answer else ''
             
             if user_answer == correct_letter:
-                console.print("[bold green]✅ Correct![/bold green]")
+                console.print("[bold green]Correct![/bold green]")
                 score += 1
             else:
-                console.print(f"[bold red]❌ Incorrect.[/bold red] The correct answer was: {correct_answer}")
+                console.print(f"[bold red]Incorrect.[/bold red] The correct answer was: {correct_answer}")
                 wrong_answers.append(q)
                 
             console.print(f"[italic]Explanation: {q.get('explanation')}[/italic]\n")
@@ -64,9 +64,9 @@ class QuizGenerator:
         session_manager.save_session(topic_title, score, len(questions))
         console.print(f"[dim]Session saved to history. Use 'astrolab stats' to view your progress.[/dim]")
         
-        if wrong_answers and Confirm.ask("\n[bold cyan]You missed some questions. Do you want an AI-powered Deep Dive explanation for your mistakes?[/bold cyan]"):
+        if wrong_answers and Confirm.ask("\n[bold cyan]You missed some questions. Do you want a Deep Dive explanation for your mistakes?[/bold cyan]"):
             with console.status("[bold magenta]Analyzing your mistakes and generating an educational Deep Dive..."):
                 deep_dive_text = gemini_client.generate_deep_dive(wrong_answers)
-            console.print(Panel(deep_dive_text, title="[bold blue]🧠 Deep Dive: Focused Review[/bold blue]", border_style="blue"))
+            console.print(Panel(deep_dive_text, title="[bold blue]Deep Dive: Focused Review[/bold blue]", border_style="blue"))
 
 

@@ -16,10 +16,9 @@ console = Console()
 def check_env():
     """Checks if the .env file is configured."""
     load_dotenv(os.path.join(os.getcwd(), '.env'))
-    if not os.getenv("NASA_API_KEY"):
-        console.print("[bold red]⚠️ Warning: NASA_API_KEY not found.[/bold red]")
-        console.print("Please create a [bold white].env[/bold white] file (use .env.example as a template).")
-        console.print("The project will use the DEMO_KEY, which has a very low rate limit.\n")
+    if not os.getenv("NASA_API_KEY") or not os.getenv("GEMINI_API_KEY"):
+        console.print("[bold yellow]Notice: API keys not found in .env.[/bold yellow]")
+        console.print("Falling back to Smart Offline Demo Mode. You can test the app's full capabilities without keys!\n")
 
 def show_apod():
     """Displays the Astronomy Picture of the Day."""

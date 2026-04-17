@@ -12,7 +12,7 @@ I needed a way to study Astronomy and Physics during the gaps between classes or
 
 ## Tech Stack
 - **Python + Rich:** For the terminal interface (which is a pain to keep aligned).
-- **Gemini 1.5 Flash:** For generating the quizzes and flashcards.
+- **Gemini 3 Flash:** For generating the quizzes and flashcards.
 - **NASA API:** For real-world space data.
 - **Smart Demo Mode:** I pre-cached data in `demo_cache.json` because I know what it's like to have no signal or no API credits.
 

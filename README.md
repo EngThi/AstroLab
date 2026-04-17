@@ -1,40 +1,29 @@
-# AstroLab 🚀
-[![NASA API Powered](https://img.shields.io/badge/NASA-API_Powered-blue)](https://api.nasa.gov/)
+# AstroLab
 
-Pivot for the Hack Club Sidequest Challenger. An astronomy/physics study tool that utilizes real NASA data (APOD endpoint) to generate interactive quizzes and flashcards using Google Gemini AI. The perfect tool for studying "between lectures"!
+This isn't a "polished corporate" project. I built this because I’m a Computer Engineering freshman with a 10km commute. Most of this code was written on a crowded bus, holding a handrail with one hand and typing on my phone with the other.
 
-## Features
+I used **Firebase Studio** (web-based) and the **Unexpected Keyboard** app to get actual `Ctrl`, `Tab`, and `Arrow` keys on Android. If the code looks structured, it’s because I spent hours auditing what the AI suggested, fixing broken ANSI escape sequences, and fighting JSON mocks when my API quota ran out.
 
-- `astrolab apod`: Shows the "Astronomy Picture of the Day" with a detailed explanation.
-- `astrolab quiz`: Generates an interactive 5-question quiz based on the daily APOD using AI. Includes a **Deep Dive** mode to learn from your mistakes!
-- `astrolab flashcard "<topic>"`: Creates a thematic flashcard based on space data and automatically saves it to your personal deck.
-- `astrolab review`: **[NOVO]** Starts a review session with all the flashcards you have generated and saved.
-- `astrolab stats`: Displays your study progress history with stylized bar charts in the terminal! Track your performance and accuracy across sessions.
+## Why I built this
+I needed a way to study Astronomy and Physics during the gaps between classes or on the bus. 
+- **NASA APOD:** Something new to learn every day.
+- **CLI First:** No heavy web pages. Just the terminal.
+- **Spaced Repetition:** Flashcards that actually work for my routine.
 
-## 💡 Quick Start (For Reviewers)
+## Tech Stack
+- **Python + Rich:** For the terminal interface (which is a pain to keep aligned).
+- **Gemini 1.5 Flash:** For generating the quizzes and flashcards.
+- **NASA API:** For real-world space data.
+- **Smart Demo Mode:** I pre-cached data in `demo_cache.json` because I know what it's like to have no signal or no API credits.
 
-**AstroLab is now published on PyPI for a frictionless testing experience!**
-
-1. Install the package globally via pip:
+## Installation
 ```bash
 pip install astrolab-cli
 ```
-
-2. **[OPTIONAL]** To use the fully dynamic AI generation, configure your credentials by creating a `.env` file in your working directory:
-```bash
-NASA_API_KEY=your_key_here
-GEMINI_API_KEY=your_key_here
-```
-*Note: If you don't configure an `.env`, the system will use a `DEMO_KEY` for NASA and safely fallback to our **Smart Demo Mode** for Gemini, pulling rich pre-generated responses from an internal cache.*
-
-3. Explore space with our beautiful interactive menu by running:
+Run it:
 ```bash
 astrolab
 ```
 
-## Architecture and Tech Stack
-
-- **NASA APOD API:** Provides the foundational space data.
-- **Google Gemini API:** Generates and evaluates questions based on space context and creates Deep Dives.
-- **Python / Rich:** CLI interface with beautiful visual components.
-- **Storage:** Study history and Flashcard Deck persisted locally via JSON in `data/`.
+## Current State
+It works. It’s modular. It’s what I use to study. If you find a bug, it’s probably because the bus hit a pothole while I was committing the code.

@@ -5,6 +5,7 @@ import webbrowser
 from rich.console import Console
 from rich.panel import Panel
 from rich.prompt import Prompt, Confirm
+from rich.table import Table
 from astrolab.nasa_client import nasa_client
 from astrolab.flashcard import FlashcardGenerator
 from astrolab.quiz import QuizGenerator

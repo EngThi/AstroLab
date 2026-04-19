@@ -6,3 +6,8 @@ TESTES/
 GEMINI.md
 LEMBRAR.txt
 .pytest_cache/dist/
+
+data/
+devlogs/
+astrolab_cli.egg-info/
+

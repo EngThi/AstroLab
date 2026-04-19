@@ -20,7 +20,7 @@ class FlashcardGenerator:
 
         context = nasa_data.get("explanation", "")
         
-        with console.status("[bold magenta]Gemini generating smart flashcard..."):
+        with console.status("[bold magenta]Crafting flashcard from NASA data..."):
             flashcard = gemini_client.generate_flashcard(topic, context)
             
         self.display_flashcard(flashcard, nasa_data.get("title"))

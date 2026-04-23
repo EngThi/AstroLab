@@ -4,6 +4,7 @@ from astrolab.session import session_manager
 from rich.console import Console
 from rich.panel import Panel
 from rich.prompt import Prompt, Confirm
+from rich.markdown import Markdown
 
 console = Console()
 
@@ -69,6 +70,9 @@ class QuizGenerator:
         if wrong_answers and Confirm.ask("\n[bold cyan]You missed some questions. Do you want a Deep Dive explanation for your mistakes?[/bold cyan]"):
             with console.status("[bold magenta]Analyzing your mistakes and generating an educational Deep Dive..."):
                 deep_dive_text = gemini_client.generate_deep_dive(wrong_answers)
-            console.print(Panel(deep_dive_text, title="[bold blue]Deep Dive: Focused Review[/bold blue]", border_style="blue"))
+            
+            # Render markdown text natively in the terminal
+            deep_dive_md = Markdown(deep_dive_text)
+            console.print(Panel(deep_dive_md, title="[bold blue]Deep Dive: Focused Review[/bold blue]", border_style="blue"))
 
 

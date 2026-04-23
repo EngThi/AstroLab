@@ -32,10 +32,10 @@ class NasaAPIClient:
             
     def _fallback_apod(self) -> dict:
         return {
-            "title": "The Carina Nebula (Offline Cache)",
-            "explanation": "The NASA API is currently unreachable (503 Service Unavailable). This is a cached entry. The Carina Nebula is a large, complex area of bright and dark nebulosity in the constellation Carina, located in the Carina-Sagittarius Arm of the Milky Way galaxy. It is one of the largest diffuse nebulae in our skies.",
-            "url": "https://www.nasa.gov/wp-content/uploads/2023/03/359218main_hs-2009-25-e-full_full.jpg",
-            "date": "Offline"
+            "title": "Saturn at Equinox (Offline/Rate-Limited Cache)",
+            "explanation": "The NASA API is currently unreachable or you have exceeded the DEMO_KEY rate limit (30 requests/hour). Please add your own NASA_API_KEY to the .env file! Meanwhile, enjoy this cached image of Saturn illuminated by sunlight exactly edge-on to its rings.",
+            "url": "https://images-assets.nasa.gov/image/PIA12235/PIA12235~orig.jpg",
+            "date": "Offline Cache"
         }
         
     def search_image(self, query: str) -> dict:

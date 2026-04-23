@@ -28,6 +28,11 @@ Then, just run:
 astrolab
 ```
 
+### API Keys (Optional)
+If you want to use your own keys for real-time generation:
+- Get a **NASA API Key** at [api.nasa.gov](https://api.nasa.gov/)
+- Get a **Google Gemini Key** at [aistudio.google.com](https://aistudio.google.com/)
+
 ## Track Your Progress & Deep Dive
 I didn't just want to answer questions; I wanted to see if I was improving. The app features local persistence with a stats tracker.
 

@@ -15,18 +15,27 @@ class NasaAPIClient:
         # We evaluate the env var here again just in case it was loaded later
         self.api_key = api_key or os.getenv("NASA_API_KEY", "DEMO_KEY")
         
-    def get_apod(self) -> dict:
+    def get_apod(self, random: bool = False) -> dict:
         """
         Fetches the Astronomy Picture of the Day (APOD).
         
+        Args:
+            random: If True, fetches a random APOD from history.
+            
         Returns:
             dict: APOD data (title, explanation, url, etc).
         """
         try:
             params = {"api_key": self.api_key}
+            if random:
+                params["count"] = 1
+                
             response = requests.get(APOD_URL, params=params, timeout=10)
             response.raise_for_status()
-            return response.json()
+            
+            data = response.json()
+            # If count=1, NASA returns a list with one item
+            return data[0] if isinstance(data, list) else data
         except Exception:
             return self._fallback_apod()
             

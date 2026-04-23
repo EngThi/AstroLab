@@ -10,11 +10,13 @@ console = Console()
 class QuizGenerator:
     """Generator and executor of NASA data-based quizzes."""
     
-    def run_daily_quiz(self):
+    def run_daily_quiz(self, is_random: bool = False):
         """Fetches the APOD and generates an interactive 5-question quiz."""
-        with console.status("[bold cyan]Fetching today's NASA APOD data to use as study context for your quiz..."):
+        status_msg = "Fetching a random space event for your quiz..." if is_random else "Fetching today's NASA APOD data to use as study context for your quiz..."
+        
+        with console.status(f"[bold cyan]{status_msg}"):
             try:
-                apod_data = nasa_client.get_apod()
+                apod_data = nasa_client.get_apod(random=is_random)
             except Exception as e:
                 console.print(f"[bold red]Error fetching NASA data: {e}[/bold red]")
                 return

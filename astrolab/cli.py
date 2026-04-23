@@ -52,31 +52,35 @@ def interactive_menu():
     while True:
         console.print("\n[bold cyan]Select an activity:[/bold cyan]")
         console.print("1. 🔭 View Astronomy Picture of the Day")
-        console.print("2. 🧠 Start Space Quiz")
-        console.print("3. 🃏 Generate Study Flashcard")
-        console.print("4. 📊 Performance Stats")
-        console.print("5. 🔄 Review Your Deck")
-        console.print("6. 🩺 System Health Check")
-        console.print("7. 🚪 Exit")
+        console.print("2. 🧠 Start Today's Space Quiz")
+        console.print("3. 🎲 Surprise Me! (Random Quiz)")
+        console.print("4. 🃏 Generate Study Flashcard")
+        console.print("5. 📊 Performance Stats")
+        console.print("6. 🔄 Review Your Deck")
+        console.print("7. 🩺 System Health Check")
+        console.print("8. 🚪 Exit")
         
-        choice = Prompt.ask("\nAction", choices=["1", "2", "3", "4", "5", "6", "7"])
+        choice = Prompt.ask("\nAction", choices=["1", "2", "3", "4", "5", "6", "7", "8"])
         
         if choice == "1":
             show_apod()
         elif choice == "2":
             generator = QuizGenerator()
-            generator.run_daily_quiz()
+            generator.run_daily_quiz(is_random=False)
         elif choice == "3":
+            generator = QuizGenerator()
+            generator.run_daily_quiz(is_random=True)
+        elif choice == "4":
             topic = Prompt.ask("Enter a space topic (e.g. 'jupiter', 'apollo 11')")
             generator = FlashcardGenerator()
             generator.create_flashcard(topic)
-        elif choice == "4":
-            session_manager.show_stats()
         elif choice == "5":
-            deck_manager.review_deck()
+            session_manager.show_stats()
         elif choice == "6":
-            run_health_check()
+            deck_manager.review_deck()
         elif choice == "7":
+            run_health_check()
+        elif choice == "8":
             console.print("[bold green]Closing system. Fly safe![/bold green]")
             sys.exit(0)
 
@@ -86,6 +90,7 @@ def run_health_check():
     import platform
     
     table = Table(title="🔧 AstroLab System Health", show_header=False, border_style="dim")
+    table.add_row("AstroLab Version", "1.0.7")
     table.add_row("Python Version", platform.python_version())
     table.add_row("OS", platform.system())
     
@@ -113,6 +118,9 @@ def main():
     # Command 'quiz'
     subparsers.add_parser("quiz", help="Generate an interactive 5-question quiz based on today's APOD")
     
+    # Command 'random'
+    subparsers.add_parser("random", help="Generate a quiz based on a random day from NASA history")
+    
     # Command 'flashcard'
     flashcard_parser = subparsers.add_parser("flashcard", help="Create a flashcard about a space topic")
     flashcard_parser.add_argument("tema", type=str, help="Topic to search on NASA (e.g., 'gravity', 'black hole')")
@@ -132,7 +140,10 @@ def main():
         show_apod()
     elif args.command == "quiz":
         generator = QuizGenerator()
-        generator.run_daily_quiz()
+        generator.run_daily_quiz(is_random=False)
+    elif args.command == "random":
+        generator = QuizGenerator()
+        generator.run_daily_quiz(is_random=True)
     elif args.command == "flashcard":
         generator = FlashcardGenerator()
         generator.create_flashcard(args.tema)

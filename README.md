@@ -1,8 +1,12 @@
 # AstroLab
 
-A study tool for astronomy and physics built for the terminal. No heavy web interfaces, just real NASA data and AI-generated quizzes to help you study between lectures.
+[![PyPI version](https://badge.fury.io/py/astrolab-cli.svg)](https://badge.fury.io/py/astrolab-cli)
+[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![NASA API Powered](https://img.shields.io/badge/NASA-API_Powered-black)](https://api.nasa.gov/)
 
-I built this because reading blocks of theoretical physics gets boring fast. With AstroLab, I pull the Astronomy Picture of the Day (APOD) and let Gemini AI create interactive, university-level quizzes and flashcards out of it.
+A study tool for astronomy and physics built for the terminal. No heavy web interfaces, just real NASA data and Gemini AI-generated quizzes to help you study between lectures.
+
+I built this because reading blocks of theoretical physics gets boring fast. With AstroLab, I pull the Astronomy Picture of the Day (APOD) and let AI create interactive, university-level quizzes and flashcards out of it.
 
 ![AstroLab Interface](assets/menu.png)
 

@@ -16,6 +16,23 @@ I built this because reading blocks of theoretical physics gets boring fast. Wit
 - **Gemini 2.5 Flash:** Fast enough to generate quizzes and deep dives on the fly.
 - **Offline / Smart Demo Mode:** I coded a fallback caching system. If you don't have API keys or internet, the app won't crash. It serves pre-generated, high-quality offline quizzes. I know what it's like to have your code break during a review because of missing .env files, so I fixed that friction.
 
+## Feature Gallery
+
+**NASA Astronomy Picture of the Day (APOD)**
+![APOD](assets/apod.png)
+
+**Surprise Me! (Random Historical APOD)**
+![Surprise Mode](assets/surprise.png)
+
+**Generate Study Flashcards**
+![Flashcard Generation](assets/flashcard.png)
+
+**Review Your Personal Deck**
+![Deck Review](assets/deck.png)
+
+**System Health Check**
+![Health Check](assets/example_check_system.png)
+
 ## Try it out
 I packaged this up so anyone can run it instantly:
 
@@ -36,7 +53,16 @@ If you want to use your own keys for real-time generation:
 ## Track Your Progress & Deep Dive
 I didn't just want to answer questions; I wanted to see if I was improving. The app features local persistence with a stats tracker.
 
+![Stats Progress](assets/progress.png)
+
 If you get a quiz question wrong, AstroLab doesn't just give you the answer. It asks if you want a "Deep Dive", where it acts like a physics professor and explains the exact concept you missed using everyday analogies right in the terminal.
+
+![Deep Dive 1](assets/deep-dive1.png)
+![Deep Dive 2](assets/deep-dive2.png)
+![Deep Dive 3](assets/deep-dive3.png)
+![Deep Dive 4](assets/deep-dive4.png)
+![Deep Dive 5](assets/deep-dive5.png)
+![Deep Dive 6](assets/deep-dive6.png)
 
 ---
 *Built for the Hack Club Sidequest Challenger.*
